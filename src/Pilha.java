@@ -4,6 +4,7 @@ public class Pilha<E> {
 
 	private Celula<E> topo;
 	private Celula<E> fundo;
+	private int tamanho;
 
 	public Pilha() {
 
@@ -20,12 +21,14 @@ public class Pilha<E> {
 	public void empilhar(E item) {
 
 		topo = new Celula<E>(item, topo);
+		tamanho ++;
 	}
 
 	public E desempilhar() {
 
 		E desempilhado = consultarTopo();
 		topo = topo.getProximo();
+		tamanho --;
 		return desempilhado;
 
 	}
@@ -54,7 +57,29 @@ public class Pilha<E> {
 	 */
 	public Pilha<E> subPilha(int numItens) {
 		
-		// TODO
-		return null;
+		if(numItens > tamanho){
+			throw new IllegalArgumentException("o valor solicitado é maior que o numero de itens");
+		}else{
+
+			Pilha<E> pilhaAux = new Pilha<>();
+			Pilha<E> pilhaFinal = new Pilha<>();
+
+			for (int i = 0; i < numItens; i++ ){
+				pilhaAux.empilhar(desempilhar());
+			}
+
+			while (!pilhaAux.vazia()) {
+				
+				E dado;
+
+				dado = pilhaAux.desempilhar();
+
+				pilhaFinal.empilhar(dado);
+				empilhar(dado);
+
+			}
+			
+			return pilhaFinal;
+		}
 	}
 }

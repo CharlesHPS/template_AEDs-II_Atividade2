@@ -210,7 +210,8 @@ public class App {
      */
     public static void finalizarPedido(Pedido pedido) {
     	
-    	// TODO
+    	pilhaPedidos.empilhar(pedido);
+        
     }
     
     public static void listarProdutosPedidosRecentes() {
